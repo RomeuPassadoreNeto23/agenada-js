@@ -11,7 +11,10 @@ interface Props{
 export function Cronometro({selecionado}:Props){
      const [tempo,setTempo] = useState<number>()
      useEffect(() =>{
-        setTempo( tempoParasegundo(String(selecionado?.tempo) ) )   
+         if(selecionado?.tempo){
+            setTempo( tempoParasegundo(String(selecionado?.tempo) ) )  
+         }
+ 
      }, [ selecionado] )
      function regressiva(contador: number = 0){
         setTimeout( ( ) => {
