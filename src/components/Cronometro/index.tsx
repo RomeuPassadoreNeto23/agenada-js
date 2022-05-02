@@ -4,11 +4,13 @@ import style from './Cronometro.module.scss'
 import {tempoParasegundo} from "../../commmons/util/time"
 import { ITarefas } from "../../types/Tarefas";
 import { useEffect, useState} from 'react';
+
 interface Props{
     selecionado: ITarefas | undefined
+    finalizarTarefa: ( ) => void
 }
 
-export function Cronometro({selecionado}:Props){
+export function Cronometro({selecionado,finalizarTarefa}:Props){
      const [tempo,setTempo] = useState<number>()
      useEffect(() =>{
          if(selecionado?.tempo){
@@ -20,10 +22,13 @@ export function Cronometro({selecionado}:Props){
         setTimeout( ( ) => {
             if(contador> 0 ){
                 setTempo(contador-1)
-                return regressiva(contador-1)}
+                return regressiva(contador-1)
+            }
+            finalizarTarefa();
            
         },1000)
      }
+
      
     return(
         
@@ -38,4 +43,9 @@ export function Cronometro({selecionado}:Props){
                 </Botao>
             </div>
     )
+    
 }
+
+
+
+
